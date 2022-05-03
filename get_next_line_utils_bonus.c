@@ -6,11 +6,11 @@
 /*   By: aaguiler <aaguiler@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:55:28 by aaguiler          #+#    #+#             */
-/*   Updated: 2022/05/03 10:15:48 by aaguiler         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:32:27 by aaguiler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_strlen(char *str)
 {

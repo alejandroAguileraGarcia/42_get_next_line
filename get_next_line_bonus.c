@@ -6,12 +6,11 @@
 /*   By: aaguiler <aaguiler@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 16:04:38 by aaguiler          #+#    #+#             */
-/*   Updated: 2022/05/03 10:44:21 by aaguiler         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:39:56 by aaguiler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "get_next_line_bonus.h"
 
 char	*ft_calloc(int count, int size)
 {
