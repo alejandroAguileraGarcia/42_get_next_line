@@ -6,7 +6,7 @@
 /*   By: aaguiler <aaguiler@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:55:28 by aaguiler          #+#    #+#             */
-/*   Updated: 2022/05/02 19:27:23 by aaguiler         ###   ########.fr       */
+/*   Updated: 2022/05/03 10:15:48 by aaguiler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strlen(char *str)
 
 int	ft_is_line(char *memom, int n)
 {
-	int i;
+	int	i;
 
 	if (n < BUFFER_SIZE)
 		return (1);
@@ -45,40 +45,31 @@ char	*ft_strjoin(char *memom, char *buff, int n)
 	char	*r;
 	int		len;
 	int		i;
-	int		j;
 
 	if (!memom)
 	{
-		memom = malloc(1);
-		memom[0] = 0;
+		memom = ft_calloc(1, 1);
+		if (!memom)
+			return (NULL);
 	}
 	len = ft_strlen(memom) + n;
-	r = (char *)malloc((len + 1) * sizeof(char));
+	r = ft_calloc(len + 1, sizeof(char));
 	if (!r)
 	{
-		if (memom)
-			free (memom);
+		free (memom);
 		return (NULL);
 	}
-	r[len] = '\0';
-	i = 0;
-	while (memom[i])
-	{
+	i = -1;
+	while (memom[++i])
 		r[i] = memom [i];
-		i++;
-	}
-	j = 0;
-	while (buff[j])
-	{
-		r[j + i] = buff[j];
-		j++;
-	}
-	if (memom)
-		free (memom);
+	len = -1;
+	while (++len < n)
+		r[len + i] = buff[len];
+	free (memom);
 	return (r);
 }
 
-int		ft_line_len(char *memom)
+int	ft_line_len(char *memom)
 {
 	int	i;
 
@@ -99,7 +90,7 @@ char	*ft_get_line(char *memom)
 	char	*nl;
 
 	len = ft_line_len(memom);
-	nl = (char *)malloc((len + 1) * sizeof(char));
+	nl = ft_calloc(len + 1, sizeof(char));
 	if (!nl)
 		return (NULL);
 	nl[len] = '\0';

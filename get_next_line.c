@@ -6,40 +6,49 @@
 /*   By: aaguiler <aaguiler@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 16:04:38 by aaguiler          #+#    #+#             */
-/*   Updated: 2022/05/02 19:32:10 by aaguiler         ###   ########.fr       */
+/*   Updated: 2022/05/03 10:30:19 by aaguiler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
+char	*ft_calloc(int count, int size)
+{
+	char	*r;
+	int		i;
+
+	r = malloc(count * size);
+	if (!r)
+		return (0);
+	i = 0;
+	while (i < count * size)
+		r[i++] = 0;
+	return (r);
+}
+
 char	*ft_cut_line(char *memom)
 {
 	char	*r;
 	int		len;
 	int		i;
-	int		linelen;
 
-	linelen = ft_line_len(memom);
-	len = ft_strlen(memom) - linelen;
+	len = ft_strlen(memom) - ft_line_len(memom);
 	if (len == 0)
 	{
 		free (memom);
-		memom = NULL;
 		return (NULL);
 	}
-	r = (char *)malloc(len + 1 * sizeof(char));
+	r = ft_calloc(len + 1, sizeof(char));
 	if (!r)
 	{
 		free (memom);
 		return (NULL);
-		return (NULL);
 	}
-	r[len] = '\0';
 	i = 0;
 	while (i < len)
 	{
-		r[i] = memom[linelen + i];
+		r[i] = memom[ft_line_len(memom) + i];
 		i++;
 	}
 	free(memom);
@@ -53,6 +62,7 @@ char	*get_next_line(int fd)
 	char		*nl;
 	int			n;
 
+	nl = NULL;
 	n = BUFFER_SIZE;
 	buff[n] = '\0';
 	while (!ft_is_line(memom, n))
@@ -63,7 +73,8 @@ char	*get_next_line(int fd)
 		if (n == 0 && !memom)
 		{
 			free (memom);
-			memom = NULL;
+			if (nl)
+				free (nl);
 			return (NULL);
 		}
 		memom = ft_strjoin (memom, buff, n);
@@ -71,14 +82,4 @@ char	*get_next_line(int fd)
 	nl = ft_get_line(memom);
 	memom = ft_cut_line(memom);
 	return (nl);
-}
-
-int	main(void)
-{
-	int fd;
-
-	fd = open ("ejemplo2", O_RDONLY);
-	printf("%s\n", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	close(fd);
 }
